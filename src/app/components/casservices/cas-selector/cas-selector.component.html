@@ -1,0 +1,9 @@
+<mat-form-field style="width: 100%;" *ngIf="services">
+  <mat-label>{{label}}</mat-label>
+
+  <mat-select [ngModel]="selected" (ngModelChange)="changeValue($event)" name="group">
+    <mat-option *ngFor="let option of services" [value]="[option.serviceId, option.serviceName]">
+      {{ option.serviceName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Services autorisés à Proxy ce service</h1>
+
+<mat-dialog-content *ngIf="!proxies">
+  <p>Chargement des apps autorisées à proxy...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" *ngIf="proxies">
+  <mat-list>
+    <mat-list-item *ngIf="proxies.length === 0">Il n'y a aucun proxy autorisé pour l'instant
+    </mat-list-item>
+    <mat-list-item *ngFor="let proxy of proxies" style="position: relative;">
+      <code>{{proxy[1]}}</code>
+      <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeProxy(proxy)">
+        <mat-icon style="vertical-align: middle;">delete</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-list-item>
+      <app-cas-selector style="width: calc(100% - 40px)" label="Groupe à ajouter"
+                          [(selected)]="proxyAdd"></app-cas-selector>
+      <button type="submit" style="position: absolute; right: 5px;" mat-icon-button
+              [disabled]="adding" (click)="submitProxy()">
+        <mat-icon style="vertical-align: middle;">add</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="right">
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

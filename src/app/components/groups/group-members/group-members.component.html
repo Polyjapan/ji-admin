@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Liste des membres du groupe {{group}}</h1>
+
+<mat-dialog-content *ngIf="!members">
+  <p>Chargement de la liste des membres...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="members">
+  <mat-action-list>
+    <mat-list-item *ngFor="let member of members" (click)="openProfile(member.id)">#{{member.id}} {{member.details.firstName}} {{member.details.lastName}} ({{member.email}})</mat-list-item>
+  </mat-action-list>
+
+  <p *ngIf="members.length === 0">Ce groupe ne contient aucun membre pour l'instant.</p>
+  <br>
+  <p>Pour ajouter ou retirer un membre, rendez vous sur son profil.</p>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions align="right">
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

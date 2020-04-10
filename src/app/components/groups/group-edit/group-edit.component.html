@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Modification du groupe {{name}}</h1>
+
+<mat-dialog-content *ngIf="!group">
+  <p>Chargement du groupe...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="group">
+  <form id="editForm">
+    <div fxLayout="column">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Nom interne</mat-label>
+        <input matInput name="name" placeholder="un_nom_de_groupe" [(ngModel)]="group.group.name">
+      </mat-form-field>
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Nom public</mat-label>
+        <input matInput name="displayName" placeholder="Mon super groupe" [(ngModel)]="group.group.displayName">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+  <button mat-button *ngIf="group" (click)="submitGroup()" type="submit" form="editForm" [disabled]="sending" color="primary">Enregistrer</button>
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

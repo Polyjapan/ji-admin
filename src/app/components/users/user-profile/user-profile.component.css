@@ -1,0 +1,11 @@
+.left-col {
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

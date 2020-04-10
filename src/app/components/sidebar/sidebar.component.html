@@ -1,0 +1,41 @@
+<mat-nav-list>
+  <a mat-list-item [class.active]="subUrl === ''" [routerLink]="['.']">
+    <mat-icon>home</mat-icon>
+    Accueil</a>
+  <a mat-list-item [class.active]="subUrl === 'users'" [routerLink]="['users']">
+    <mat-icon>person</mat-icon>
+    Utilisateurs</a>
+  <a mat-list-item [class.active]="subUrl === 'groups'" [routerLink]="['groups']">
+    <mat-icon>group</mat-icon>
+    Groupes</a>
+
+  <a mat-list-item [class.active]="subUrl === 'apikeys'" [routerLink]="['apikeys']">
+    <mat-icon>vpn_key</mat-icon>
+    Clés d'API</a>
+
+  <a mat-list-item [class.active]="subUrl === 'casservices'" [routerLink]="['casservices']">
+    <mat-icon>device_hub</mat-icon>
+    Services CAS</a>
+
+  <!--<a mat-list-item [class.active]="subUrl === 'user-logs'" [routerLink]="['user-logs']">
+    <mat-icon>swap_horiz</mat-icon>
+    Historique par utilisateur</a>
+  <a mat-list-item [class.active]="subUrl === 'objects-out'" [routerLink]="['objects-out']">
+    <mat-icon>list</mat-icon>
+    Liste des objets prêtés</a>
+  <a mat-list-item [class.active]="subUrl === 'external-loans'" [routerLink]="['external-loans']">
+    <mat-icon>receipt</mat-icon>
+    Prêts externes</a>
+  <a mat-list-item [class.active]="subUrl === 'returns'" [routerLink]="['returns']">
+    <mat-icon>calendar_today</mat-icon>
+    Rendus externes</a>
+  <a mat-list-item [class.active]="subUrl === 'storages'" [routerLink]="['storages']">
+    <mat-icon>storage</mat-icon>
+    Stockages</a>
+  <a mat-list-item [class.active]="subUrl === 'tidying'" [routerLink]="['tidying']">
+    <mat-icon>archive</mat-icon>
+    Rangement</a>
+  <a mat-list-item [class.active]="subUrl === 'staffs'" [routerLink]="['staffs']">
+    <mat-icon>event_seat</mat-icon>
+    Événements</a>-->
+</mat-nav-list>

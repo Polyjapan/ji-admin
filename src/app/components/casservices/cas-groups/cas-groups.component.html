@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>Groupes requis et autorisés</h1>
+
+<mat-dialog-content *ngIf="!restricted || !allowed">
+  <p>Chargement des groupes...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" *ngIf="restricted && allowed">
+  <div fxFlex>
+    <h3>Groupes requis</h3>
+    <p>Un membre souhaitant accéder à l'application doit appartenir à <b>tous</b> les groupes suivants,</p>
+
+    <mat-list>
+      <mat-list-item *ngIf="restricted.length === 0">Il n'y a aucun groupe requis pour l'instant
+      </mat-list-item>
+      <mat-list-item *ngFor="let group of restricted" style="position: relative;">
+        <code>{{group}}</code>
+        <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeRestricted(group)">
+          <mat-icon style="vertical-align: middle;">delete</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <app-group-selector style="width: calc(100% - 40px)" label="Groupe à ajouter"
+                            [(selected)]="restrictAdd"></app-group-selector>
+        <button type="submit" style="position: absolute; right: 5px;" mat-icon-button
+                [disabled]="restricting" (click)="restrict()">
+          <mat-icon style="vertical-align: middle;">add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex>
+    <h3>Groupes autorisés</h3>
+    <p>Un membre souhaitant accéder à l'application doit appartenir à <b>au moins un</b> des groupes suivants.</p>
+
+
+    <mat-list>
+      <mat-list-item *ngIf="allowed.length === 0">Il n'y a aucun groupe autorisé pour l'instant
+      </mat-list-item>
+      <mat-list-item *ngFor="let group of allowed" style="position: relative;">
+        <code>{{group}}</code>
+        <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeAllowed(group)">
+          <mat-icon style="vertical-align: middle;">delete</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <app-group-selector style="width: calc(100% - 40px)" label="Groupe à ajouter"
+                            [(selected)]="allowAdd"></app-group-selector>
+        <button type="submit" style="position: absolute; right: 5px;" mat-icon-button
+                [disabled]="allowing" (click)="allow()">
+          <mat-icon style="vertical-align: middle;">add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="right">
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

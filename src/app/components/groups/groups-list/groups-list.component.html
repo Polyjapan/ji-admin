@@ -1,0 +1,79 @@
+<h1>Liste des groupes enregistrés
+  <button mat-stroked-button (click)="refresh()">Recharger</button>
+</h1>
+
+<br>
+<mat-form-field style="width: 100%;">
+  <input matInput placeholder="Filtrer" [(ngModel)]="groups.filter" name="filterName">
+</mat-form-field>
+
+
+<table mat-table [dataSource]="groups" matSort style="width: 100%;">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom interne</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'name')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="displayName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom public</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'displayName')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'id')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="scopes">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Permissions</th>
+    <td mat-cell *matCellDef="let e"><code>{{dataAccessor(e, 'scopes')}}</code>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="edit(element.group.name)" title="Modifier le groupe">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="members(element.group.name)" title="Membres du groupe">
+        <mat-icon>people</mat-icon>
+      </button>
+      <button mat-icon-button (click)="scopes(element.group.name)" title="Permissions du groupe">
+        <mat-icon>list</mat-icon>
+      </button>
+      <button mat-icon-button (click)="delete(element.group.name)" title="Supprimer le groupe">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+
+<hr>
+<br>
+
+<h2>Créer un groupe</h2>
+<form>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Nom interne</mat-label>
+      <input matInput name="name" placeholder="un_nom_de_groupe" [(ngModel)]="createGroup.name">
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Nom public</mat-label>
+      <input matInput name="displayName" placeholder="Mon super groupe" [(ngModel)]="createGroup.displayName">
+    </mat-form-field>
+    <div fxFlex="0.5 1 0%">
+      <button type="submit" style="width: 100%; height: 55px;" mat-stroked-button color="primary" [disabled]="creatingGroup" (click)="submitGroup()">
+        Créer
+      </button>
+    </div>
+  </div>
+</form>
+

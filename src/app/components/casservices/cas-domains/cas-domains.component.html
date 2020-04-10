@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Domaines du service CAS</h1>
+
+<mat-dialog-content *ngIf="!domains">
+  <p>Chargement de la liste des domaines...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="domains">
+  <mat-list>
+    <mat-list-item *ngIf="domains.length === 0">Ce service ne contient aucun domaine pour l'instant.</mat-list-item>
+    <mat-list-item *ngFor="let domain of domains" style="position: relative;">
+      <code>{{domain}}</code>
+      <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeDomain(domain)">
+        <mat-icon style="vertical-align: middle;">delete</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-list-item>
+      <form id="add-scope">
+        <mat-form-field>
+          <mat-label>Domaine à ajouter</mat-label>
+          <input matInput name="scope" [disabled]="addingDomain" placeholder="mon.domaine.com" [(ngModel)]="domainToAdd">
+        </mat-form-field>
+      </form>
+      <button type="submit" style="position: absolute; right: 5px;" mat-icon-button form="add-scope"
+              [disabled]="addingDomain" (click)="addDomain()">
+        <mat-icon style="vertical-align: middle;">add</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+
+<div mat-dialog-actions align="right">
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

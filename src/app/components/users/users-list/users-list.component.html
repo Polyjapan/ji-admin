@@ -1,0 +1,44 @@
+<h1>Liste des utilisateurs enregistrés <button mat-stroked-button (click)="refresh()">Recharger</button></h1>
+
+<br>
+<mat-form-field style="width: 100%;">
+  <input matInput placeholder="Filtrer" [(ngModel)]="users.filter" name="filterName">
+</mat-form-field>
+
+
+<table mat-table [dataSource]="users" matSort style="width: 100%;">
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'firstName')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'lastName')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'id')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'email')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="view(element)">
+        <mat-icon>info</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
+

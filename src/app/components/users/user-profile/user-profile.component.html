@@ -1,0 +1,101 @@
+<h1 mat-dialog-title>Profil d'un utilisateur</h1>
+
+<mat-dialog-content *ngIf="!profile">
+  <p>Chargement du profil...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="profile as prof" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+  <div fxFlex>
+    <h3>Informations</h3>
+    <table>
+      <tr>
+        <td class="left-col">ID :</td>
+        <td>#{{prof.id}}</td>
+      </tr>
+      <tr>
+        <td class="left-col">Email :</td>
+        <td>{{prof.email}} {{prof.emailConfirmed ? '(confirmé)' : '(non confirmé)'}}</td>
+      </tr>
+      <tr>
+        <td class="left-col">Nom :</td>
+        <td>{{prof.details.lastName}}</td>
+      </tr>
+      <tr>
+        <td class="left-col">Prénom :</td>
+        <td>{{prof.details.firstName}}</td>
+      </tr>
+      <tr>
+        <td class="left-col">Téléphone :</td>
+        <td>{{prof.details.phoneNumber}}</td>
+      </tr>
+      <tr *ngIf="prof.address">
+        <td class="left-col">Adresse :</td>
+        <td>
+          {{prof.address.address}}<br>
+          {{prof.address.addressComplement}}<br *ngIf="prof.address.addressComplement"/>
+          {{prof.address.postCode}} {{prof.address.city}}<br/>
+          {{prof.address.country}}<br/>
+        </td>
+      </tr>
+      <tr>
+        <td class="left-col">Mot de passe hashé en :</td>
+        <td>{{prof.passwordAlgo}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div fxFlex>
+    <h3>Groupes</h3>
+
+    <mat-list>
+      <mat-list-item *ngIf="prof.groups.length === 0">Cet utilisateur n'est dans aucun groupe pour l'instant.
+      </mat-list-item>
+      <mat-list-item *ngFor="let group of prof.groups" style="position: relative;">
+        <code>{{group}}</code>
+        <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeGroup(group)">
+          <mat-icon style="vertical-align: middle;">delete</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <app-group-selector style="width: calc(100% - 40px)" label="Groupe à ajouter"
+                            [(selected)]="groupToAdd"></app-group-selector>
+        <button type="submit" style="position: absolute; right: 5px;" mat-icon-button
+                [disabled]="addingToGroup" (click)="addToGroup()">
+          <mat-icon style="vertical-align: middle;">add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex>
+    <h3>Permissions</h3>
+
+    <mat-list>
+      <mat-list-item *ngIf="prof.scopes.length === 0">Ce groupe ne contient aucune permission pour l'instant.
+      </mat-list-item>
+      <mat-list-item *ngFor="let scope of prof.scopes" style="position: relative;">
+        <code>{{scope}}</code>
+        <button class="mat-icon-button" style="position: absolute; right: 5px;" (click)="removeScope(scope)">
+          <mat-icon style="vertical-align: middle;">delete</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <form id="add-scope">
+          <mat-form-field>
+            <mat-label>Scope à ajouter</mat-label>
+            <input matInput name="scope" style="width: calc(100% - 40px)" [disabled]="addingScope"
+                   placeholder="un_nom_de_groupe" [(ngModel)]="scopeToAdd">
+          </mat-form-field>
+        </form>
+        <button type="submit" style="position: absolute; right: 5px;" mat-icon-button form="add-scope"
+                [disabled]="addingScope" (click)="addScope()">
+          <mat-icon style="vertical-align: middle;">add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="right">
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

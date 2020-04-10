@@ -1,0 +1,72 @@
+<h1>Liste des clés d'API
+  <button mat-stroked-button (click)="refresh()">Recharger</button>
+</h1>
+
+<br>
+<mat-form-field style="width: 100%;">
+  <input matInput placeholder="Filtrer" [(ngModel)]="apiKeys.filter" name="filterName">
+</mat-form-field>
+
+
+<table mat-table [dataSource]="apiKeys" matSort style="width: 100%;">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom interne</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'name')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Auteur</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'author')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+    <td mat-cell *matCellDef="let e"> {{dataAccessor(e, 'id')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="scopes">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Permissions</th>
+    <td mat-cell *matCellDef="let e"><code>{{dataAccessor(e, 'scopes')}}</code>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="edit(element.apiKey.appId)" title="Modifier le groupe">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="privateKey(element.apiKey.appId)" title="Afficher la clé privée">
+        <mat-icon>vpn_key</mat-icon>
+      </button>
+      <button mat-icon-button (click)="scopes(element.apiKey.appId)" title="Permissions du groupe">
+        <mat-icon>list</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+
+<hr>
+<br>
+
+<h2>Créer une clé d'API</h2>
+<form>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput name="displayName" placeholder="Ma Super App" [(ngModel)]="create">
+    </mat-form-field>
+    <div fxFlex="0.5 1 0%">
+      <button type="submit" style="width: 100%; height: 55px;" mat-stroked-button color="primary" [disabled]="creating" (click)="submit()">
+        Créer
+      </button>
+    </div>
+  </div>
+</form>
+
