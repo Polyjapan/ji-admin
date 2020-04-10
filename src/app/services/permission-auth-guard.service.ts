@@ -59,11 +59,11 @@ export class PermissionAuthGuard implements CanActivate, CanActivateChild {
         .pipe(map(success => {
           this.authService.login(success.token);
 
-          /*if (!this.authService.hasScope("admin/access")) {
+          if (!this.authService.hasScope("admin/access")) {
             this.authService.logout();
             const details = 'permissions';
             return this.router.createUrlTree(['login-failed', details]);
-          }*/
+          }
 
           return this.router.createUrlTree(['/']);
         }))
