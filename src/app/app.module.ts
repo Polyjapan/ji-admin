@@ -47,6 +47,12 @@ import { CasDomainsComponent } from './components/casservices/cas-domains/cas-do
 import { CasEditComponent } from './components/casservices/cas-edit/cas-edit.component';
 import { CasSelectorComponent } from './components/casservices/cas-selector/cas-selector.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { EventsListComponent } from './components/events/events-list/events-list.component';
+import { EventAttributesListComponent } from './components/events/event-attributes-list/event-attributes-list.component';
+import { EventCreateComponent } from './components/events/event-create/event-create.component';
+import { DatetimePickerComponent } from './components/utils/datetime-picker/datetime-picker.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 export function tokenGetter() {
@@ -74,41 +80,47 @@ export function tokenGetter() {
     CasGroupsComponent,
     CasDomainsComponent,
     CasEditComponent,
-    CasSelectorComponent
+    CasSelectorComponent,
+    EventsListComponent,
+    EventAttributesListComponent,
+    EventCreateComponent,
+    DatetimePickerComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ApiTokensModule,
-        MatCardModule,
-        FlexModule,
-        MatButtonModule,
-        MatProgressBarModule,
-        HttpClientModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatListModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: environment.auth.whitelist
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ApiTokensModule,
+    MatCardModule,
+    FlexModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    HttpClientModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.auth.whitelist
 
-            }
-        }),
-        MatTableModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatInputModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MatSelectModule,
-        MatCheckboxModule
-    ],
+      }
+    }),
+    MatTableModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   providers: [
     LoginService
   ],

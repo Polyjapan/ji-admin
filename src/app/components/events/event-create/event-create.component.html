@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>{{id ? 'Modification' : 'Création'}} d'un événement</h1>
+
+<mat-dialog-content *ngIf="!event">
+  <p>Chargement de l'événement...</p>
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="event">
+  <form id="editForm">
+    <div fxLayout="column">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput name="name" placeholder="Japan Impact 37" [(ngModel)]="event.name">
+      </mat-form-field>
+
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Emplacement</mat-label>
+        <input matInput name="location" placeholder="2M2C Montreux" [(ngModel)]="event.location">
+      </mat-form-field>
+
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Visibilité</mat-label>
+        <mat-select name="visibility" [(ngModel)]="event.visibility">
+          <mat-option *ngFor="let v of Visibility" [value]="v">{{v}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-checkbox name="tests" [(ngModel)]="event.isTest">Événement utilisé pour des tests</mat-checkbox>
+      <mat-checkbox name="mainstream" [(ngModel)]="event.isMainstream">Événement principal (i.e. Jaan Impact)</mat-checkbox>
+
+      <app-datetime-picker fxFlex [(selected)]="event.start" label="Début de l'événement"></app-datetime-picker>
+      <app-datetime-picker fxFlex [(selected)]="event.end" label="Fin de l'événement"></app-datetime-picker>
+      <app-datetime-picker fxFlex [(selected)]="event.archive" label="Archivage automatique"></app-datetime-picker>
+    </div>
+  </form>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+  <button mat-button *ngIf="event" (click)="submit()" type="submit" form="editForm" [disabled]="sending"
+          color="primary">Enregistrer
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

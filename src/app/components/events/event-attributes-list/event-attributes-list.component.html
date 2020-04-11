@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Attributs de l'événement</h1>
+
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item *ngFor="let attr of attributes | keyvalue"><b><code>{{attr.key}}</code></b>: {{attr.value}}</mat-list-item>
+    <mat-list-item *ngIf="(attributes | keyvalue).length === 0"><i>Cet événement ne contient aucun attribut.</i></mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="undefined">Fermer</button>
+</div>

@@ -17,6 +17,10 @@
     <mat-icon>device_hub</mat-icon>
     Services CAS</a>
 
+  <a mat-list-item [class.active]="subUrl === 'events'" [routerLink]="['events']">
+    <mat-icon>event</mat-icon>
+    Événements</a>
+
   <!--<a mat-list-item [class.active]="subUrl === 'user-logs'" [routerLink]="['user-logs']">
     <mat-icon>swap_horiz</mat-icon>
     Historique par utilisateur</a>

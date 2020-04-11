@@ -7,6 +7,7 @@ import {UsersListComponent} from "./components/users/users-list/users-list.compo
 import {GroupsListComponent} from "./components/groups/groups-list/groups-list.component";
 import {ApikeysListComponent} from "./components/apikeys/apikeys-list/apikeys-list.component";
 import {CasServicesListComponent} from "./components/casservices/cas-services-list/cas-services-list.component";
+import {EventsListComponent} from "./components/events/events-list/events-list.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: 'groups', component: GroupsListComponent},
       {path: 'apikeys', component: ApikeysListComponent},
       {path: 'casservices', component: CasServicesListComponent},
+      {path: 'events', component: EventsListComponent},
 
     ]
   }
