@@ -30,6 +30,7 @@ export class CasServicesListComponent implements OnInit {
   private subscription: Subscription;
 
   constructor(private service: CasServicesService, private dialog: MatDialog, private snack: MatSnackBar) {
+    this.reset();
   }
 
   dataAccessor(data: CasService, col: string) {
@@ -63,6 +64,11 @@ export class CasServicesListComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  reset()  {
+    this.createService = new CasService();
+    this.createService.serviceRequiresFullInfo = false;
+  }
+
   submitService() {
     if (this.creatingService) {
       return;
@@ -71,7 +77,7 @@ export class CasServicesListComponent implements OnInit {
 
     this.service.createService(this.createService)
       .subscribe(succ => {
-        this.createService = new CasService();
+        this.reset();
         this.snack.open("Le groupe a bien été créé !", "Ok", {duration: 5000, horizontalPosition: "right"});
         this.service.pullServices().subscribe(succ => this.creatingService = false);
       }, err => {
