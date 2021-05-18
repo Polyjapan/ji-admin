@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Modification du service CAS</h1>
+<h1 mat-dialog-title>{{creating ? "Création" : "Modification"}} d'un service CAS</h1>
 
 <mat-dialog-content>
   <ng-container *ngIf="service; else loadingServiceInfo">
 
-    <form id="editForm">
+    <form id="editForm" #form (ngSubmit)="submit(form)">
       <div fxLayout="column">
 
         <mat-form-field fxFlex>
@@ -47,7 +47,7 @@
 
 
 <mat-dialog-actions>
-  <button mat-button *ngIf="service" (click)="submit()" type="submit" form="editForm" [disabled]="sending"
+  <button mat-button *ngIf="service" type="submit" form="editForm" [disabled]="sending"
           color="primary">Enregistrer
   </button>
   <button mat-button [mat-dialog-close]="undefined">Fermer</button>

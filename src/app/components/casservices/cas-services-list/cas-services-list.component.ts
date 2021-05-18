@@ -24,14 +24,10 @@ export class CasServicesListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  columns = ['id', 'name', 'url', 'actions'];
-  createService: CasService = new CasService();
-  creatingService: boolean;
+  columns = ['id', 'name', 'url', 'portal', 'actions'];
   private subscription: Subscription;
 
-  constructor(private service: CasServicesService, private dialog: MatDialog, private snack: MatSnackBar) {
-    this.reset();
-  }
+  constructor(private service: CasServicesService, private dialog: MatDialog, private snack: MatSnackBar) {}
 
   dataAccessor(data: CasService, col: string) {
     switch (col) {
@@ -41,6 +37,9 @@ export class CasServicesListComponent implements OnInit {
         return data.serviceName;
       case 'id':
         return data.serviceId;
+      case 'portal':
+        if (data.servicePortalDisplay) return 'Oui, ' + data.servicePortalTitle
+        else return 'Non'
     }
   }
 
@@ -62,31 +61,6 @@ export class CasServicesListComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  reset()  {
-    this.createService = new CasService();
-    this.createService.serviceRequiresFullInfo = false;
-  }
-
-  submitService() {
-    if (this.creatingService) {
-      return;
-    }
-    this.creatingService = true;
-
-    this.service.createService(this.createService)
-      .subscribe(succ => {
-        this.reset();
-        this.snack.open("Le service a bien été créé !", "Ok", {duration: 5000, horizontalPosition: "right"});
-        this.service.pullServices().subscribe(succ => this.creatingService = false);
-      }, err => {
-        this.creatingService = false;
-        this.snack.open(err, "Réessayer", {
-          duration: 5000,
-          horizontalPosition: "right"
-        }).onAction().subscribe(e => this.submitService());
-      })
   }
 
   edit(service: number) {
