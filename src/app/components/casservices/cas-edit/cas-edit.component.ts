@@ -24,7 +24,9 @@ export class CasEditComponent implements OnInit {
   ngOnInit(): void {
     this.services.getService(this.serviceId)
       .subscribe(
-        succ => this.service = succ,
+        succ => {
+          this.service = succ;
+        },
         err => {
           this.snack.open(err, "Fermer", {duration: 5000});
           this.dialogRef.close();

@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   auth: {
-    apiUrl: "https://auth.japan-impact.ch/",
+    apiUrl: "http://localhost:9000",
     whitelist: ['localhost:9000']
   },
   events: {
-    apiUrl: "http://localhost:9000"
+    apiUrl: "http://localhost:8000"
   }
 };
 

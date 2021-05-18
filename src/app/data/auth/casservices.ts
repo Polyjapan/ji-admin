@@ -3,6 +3,12 @@ export class CasService {
   serviceName: string;
   serviceRedirectUrl?: string;
   serviceRequiresFullInfo?: boolean;
+
+  servicePortalDisplay: boolean;
+  servicePortalTitle?: string;
+  servicePortalDescription?: string;
+  servicePortalLoginUrl?: string;
+  servicePortalImageUrl?: string;
 }
 
 export class ServiceData {

@@ -2,6 +2,7 @@
   <button mat-stroked-button (click)="refresh()">Recharger</button>
 </h1>
 
+
 <br>
 <mat-form-field style="width: 100%;">
   <input matInput placeholder="Filtrer" [(ngModel)]="services.filter" name="filterName">
@@ -49,7 +50,7 @@
   <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons></mat-paginator>
 
 <hr>
 <br>

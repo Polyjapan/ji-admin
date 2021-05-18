@@ -78,7 +78,7 @@ export class CasServicesListComponent implements OnInit {
     this.service.createService(this.createService)
       .subscribe(succ => {
         this.reset();
-        this.snack.open("Le groupe a bien été créé !", "Ok", {duration: 5000, horizontalPosition: "right"});
+        this.snack.open("Le service a bien été créé !", "Ok", {duration: 5000, horizontalPosition: "right"});
         this.service.pullServices().subscribe(succ => this.creatingService = false);
       }, err => {
         this.creatingService = false;
@@ -90,7 +90,7 @@ export class CasServicesListComponent implements OnInit {
   }
 
   edit(service: number) {
-    this.dialog.open(CasEditComponent, {data: service}).beforeClosed().subscribe(_ => this.refresh());
+    this.dialog.open(CasEditComponent, {data: service, minHeight: 600, minWidth: 800}).beforeClosed().subscribe(_ => this.refresh());
   }
 
   groups(service: number) {
